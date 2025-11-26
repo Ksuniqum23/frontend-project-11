@@ -34,6 +34,7 @@ export const submitHandler = async (rssLink) => {
     addRSS(xmlDoc, feedbackMessage, rssLink)
     // Возвращаем xmlDoc на случай, если кто-то хочет использовать результат
     return xmlDoc
+    /* eslint-disable @stylistic/brace-style */
   } catch (error) {
     feedbackMessage.type = 'danger'
     feedbackMessage.message = error.message || 'errors.unknown'
