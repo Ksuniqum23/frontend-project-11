@@ -25,11 +25,13 @@ export default async function checkUpdates() {
           if (newPostLinksArr.length > 0) {
             addNewPostsInState(rssLink, newPostLinksArr, xmlDoc)
           }
+          // eslint-disable-next-line @stylistic/brace-style
         } catch (error) {
           throw new Error(`Ошибка для ${rssLink}: ${error.message}`)
         }
       }),
     )
+    // eslint-disable-next-line @stylistic/brace-style
   } finally {
     isUpdating = false
     setTimeout(checkUpdates, 5000)
