@@ -28,7 +28,7 @@ export default async function checkUpdates() {
         } catch (error) {
           throw new Error(`Ошибка для ${rssLink}: ${error.message}`)
         }
-      })
+      }),
     )
   } finally {
     isUpdating = false
