@@ -9,26 +9,26 @@ export default async function checkUpdates() {
   isUpdating = true
   try {
     await Promise.all(
-        state.ui.rssLinksOrder.map(async (rssLink) => {
-          try {
-            const xmlString = await fetchRSS(rssLink)
-            const xmlDoc = await parseXML(xmlString)
-            const newPostLinksArr = []
+      state.ui.rssLinksOrder.map(async (rssLink) => {
+        try {
+          const xmlString = await fetchRSS(rssLink)
+          const xmlDoc = await parseXML(xmlString)
+          const newPostLinksArr = []
 
-            xmlDoc.querySelectorAll('item').forEach((item) => {
-              const postLink = item.querySelector('link')?.textContent
-              if (!(state.data.posts[postLink]?.link === postLink)) {
-                newPostLinksArr.push(postLink)
-              }
-            })
-
-            if (newPostLinksArr.length > 0) {
-              addNewPostsInState(rssLink, newPostLinksArr, xmlDoc)
+          xmlDoc.querySelectorAll('item').forEach((item) => {
+            const postLink = item.querySelector('link')?.textContent
+            if (!(state.data.posts[postLink]?.link === postLink)) {
+              newPostLinksArr.push(postLink)
             }
-          } catch (error) {
-            throw new Error(`Ошибка для ${rssLink}: ${error.message}`)
+          })
+
+          if (newPostLinksArr.length > 0) {
+            addNewPostsInState(rssLink, newPostLinksArr, xmlDoc)
           }
-        })
+        } catch (error) {
+          throw new Error(`Ошибка для ${rssLink}: ${error.message}`)
+        }
+      })
     )
   } finally {
     isUpdating = false
