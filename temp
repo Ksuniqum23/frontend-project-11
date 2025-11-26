@@ -1,0 +1,24 @@
+1. Установила сонар (зарегалась, закинула секрет в гит, добавила бандл)
+2. Добавила проверку линтера
+
+sudo apt update     //- обновление пакетов системы
+
+sudo apt install nodejs npm -y  //платформа Node.js, нужна для запуска JS-кода
+                                //Node Package Manager, используется для установки зависимостей (библиотек)
+
+npm init -y     // инициализация проекта. Создаёт package.json с настройками проекта по умолчанию.
+
+npm install eslint webpack webpack-cli webpack-dev-server --save-dev
+    // eslint → линтер для проверки кода.
+       webpack → сборщик кода.
+       webpack-cli → интерфейс командной строки для Webpack.
+       webpack-dev-server → локальный сервер для разработки.
+       --save-dev → сохраняем зависимости только для разработки, не для продакшена.
+
+3. add Makefile
+
+sudo apt install make -y
+    //чтоб работали команды make в workflows lint
+
+git rm -r --cached node_modules
+    //убираем из индекса нод модули
