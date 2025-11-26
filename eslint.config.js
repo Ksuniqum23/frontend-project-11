@@ -1,10 +1,10 @@
 import globals from 'globals'
-
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { FlatCompat } from '@eslint/eslintrc'
 import pluginJs from '@eslint/js'
 import importPlugin from 'eslint-plugin-import'
+import stylisticPlugin from '@stylistic/eslint-plugin' // ← ДОБАВЬ ЭТУ СТРОКУ
 
 // mimic CommonJS variables -- not needed if using CommonJS
 const __filename = fileURLToPath(import.meta.url)
@@ -26,13 +26,14 @@ export default [
         ...globals.browser,
       },
       parserOptions: {
-        // Eslint doesn't supply ecmaVersion in `parser.js` `context.parserOptions`
-        // This is required to avoid ecmaVersion < 2015 error or 'import' / 'export' error
         ecmaVersion: 'latest',
         sourceType: 'module',
       },
     },
-    plugins: { import: importPlugin },
+    plugins: {
+      import: importPlugin,
+      '@stylistic': stylisticPlugin, // ← ДОБАВЬ ЭТУ СТРОКУ
+    },
     rules: {
       ...importPlugin.configs.recommended.rules,
     },
@@ -56,7 +57,14 @@ export default [
       'import/no-named-as-default-member': 'off',
       'no-console': 'off',
       'import/no-extraneous-dependencies': 'off',
-      'semi': 'off',
+      semi: 'off',
+      'quote-props': 'off',
+      'eol-last': 'off',
+      // Стилистические правила можно оставить включенными или отключить
+      '@stylistic/arrow-body-style': 'off',
+      '@stylistic/arrow-parens': 'off',
+      '@stylistic/indent': 'off',
+      '@stylistic/brace-style': 'off',
     },
   },
 ]

@@ -48,4 +48,5 @@ git rm -r --cached node_modules
 npm install yup
 npm install axios
 npm install i18next
+npm install @stylistic/eslint-plugin
 
