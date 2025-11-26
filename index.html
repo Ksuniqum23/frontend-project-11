@@ -7,10 +7,35 @@
     <title>frontend-project-11</title>
   </head>
   <body>
-  <div>
-    <button class="btn btn-primary">Кнопка Bootstrap</button>
-  </div>
-    <div id="app"></div>
+
+  <section class="bg-dark text-white w-100 py-5 fixed-top p-5">
+    <div class="container-fluid">
+      <h1 class="display-4">RSS-агрегатор</h1>
+      <p class="lead">Начните читать RSS сегодня! Это легко, это красиво</p>
+      <form class="row g-2 align-items-center" id="rss-form">
+        <div class="col">
+          <input
+                  id="rss-input"
+                  autofocus=""
+                  required=""
+                  name="url"
+                  aria-label="url"
+                  class="form-control w-100"
+                  placeholder="Введите RSS-ссылку"
+                  autocomplete="off">
+        </div>
+        <div class="col-auto">
+          <button
+                  type="submit"
+                  aria-label="add"
+                  class="h-100 btn btn-lg btn-primary px-sm-5">Добавить
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </section>
+
     <script type="module" src="/src/main.js"></script>
 
   </body>
