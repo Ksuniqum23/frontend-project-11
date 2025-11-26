@@ -45,3 +45,7 @@ git rm -r --cached node_modules
 6. Bootstrap
     npm install bootstrap @popperjs/core
 
+npm install yup
+npm install axios
+npm install i18next
+

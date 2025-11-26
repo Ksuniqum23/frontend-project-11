@@ -1,6 +1,9 @@
-import './style.css';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import {initListeners} from './view/listeners.js';
+import {checkUpdates} from "./controller/checkUpdates";
 
-console.log('asdfsw');// eslint-disable-line no-console
+document.addEventListener('DOMContentLoaded', () => {
+    initListeners();
+    checkUpdates();
+});

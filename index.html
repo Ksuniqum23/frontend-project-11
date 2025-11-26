@@ -8,10 +8,10 @@
   </head>
   <body>
 
-  <section class="bg-dark text-white w-100 py-5 fixed-top p-5">
-    <div class="container-fluid">
+  <main class="bg-dark text-white py-5 mb-4">
+    <div class="container">
       <h1 class="display-4">RSS-агрегатор</h1>
-      <p class="lead">Начните читать RSS сегодня! Это легко, это красиво</p>
+      <p class="lead">Начните читать RSS сегодня! Это легко, это красиво.</p>
       <form class="row g-2 align-items-center" id="rss-form">
         <div class="col">
           <input
@@ -32,9 +32,54 @@
           </button>
         </div>
       </form>
+                  <p class="mt-2 mb-0 text-small">Пример: https://lorem-rss.hexlet.app/feed</p>
+                  <p class="mt-2 mb-0 text-small">Пример: http://feeds.bbci.co.uk/news/rss.xml</p>
+                  <p class="mt-2 mb-0 text-small">Пример: https://www.nasa.gov/feeds/iotd-feed</p>
+      <p class="feedback m-0 position-absolute small text-success">Пока нет фидбека</p>
+    </div>
+  </main>
 
+  <!--    <div    class="container mb-5">-->
+  <!--        <h1>123123</h1>-->
+  <!--        -->
+  <!--    </div>-->
+
+  <div id="app"></div>
+
+  <section class="container">
+    <div class="row gx-4 mx-n2">
+      <div class="bg-white border rounded shadow-sm p-4 col mx-2">
+        <h2 class="h5">Фиды:</h2>
+        <ul class="list-group list-group-flush" id="ulFeeds">
+          <!-- сюда будут добавляться элементы -->
+        </ul>
+      </div>
+      <div class="bg-white border rounded shadow-sm p-4 col mx-2">
+        <h2 class="h5">Посты:</h2>
+        <ul class="list-group list-group-flush mt-3" id="ulPosts">
+          <!-- сюда будут добавляться элементы -->
+        </ul>
+      </div>
     </div>
   </section>
+
+  <div class="modal" tabindex="-1" id="modalPreviewPost">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal-title"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p id="modal-description"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="btn-read-more">Читать полностью</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
     <script type="module" src="/src/main.js"></script>
 

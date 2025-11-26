@@ -1,4 +1,9 @@
-// Минимальный рабочий JS для учебного проекта
-
-// eslint-disable-next-line no-console
-console.log('Project initialized');
+// import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+// import {initListeners} from './view/listeners.js';
+// import {checkUpdates} from "./controller/checkUpdates";
+//
+// document.addEventListener('DOMContentLoaded', () => {
+//     initListeners();
+//     checkUpdates();
+// });
