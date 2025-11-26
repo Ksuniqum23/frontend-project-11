@@ -1,7 +1,7 @@
 import { previewBtnHandler, submitHandler } from '../controller/handlers.js';
 import state from '../state/state.js';
 
-export const initListeners = () => {
+const initListeners = () => {
   // Add RSS Button:
   const form = document.getElementById('rss-form');
   form.addEventListener('submit', (event) => {
@@ -21,3 +21,5 @@ export const initListeners = () => {
     previewBtnHandler(currentPostData);
   });
 };
+
+export default initListeners;

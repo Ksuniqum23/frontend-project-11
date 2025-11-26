@@ -13,7 +13,7 @@ const validateURL = Yup.object().shape({
     .test(
       'rss-already-exists',
       i18n.t('errors.addRSS'),
-      function (value) {
+      function rssAlreadyExists(value) {
         const { feeds } = this.options.context;
         return !feeds.includes(value);
       },

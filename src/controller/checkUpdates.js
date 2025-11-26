@@ -4,7 +4,7 @@ import parseXML from './parseXml.js';
 import { addNewPostsInState } from '../state/updateState.js';
 
 let isUpdating = false;
-export const checkUpdates = async () => {
+export default async function checkUpdates() {
   if (isUpdating) return;
   isUpdating = true;
   try {
@@ -24,11 +24,11 @@ export const checkUpdates = async () => {
           addNewPostsInState(rssLink, newPostLinksArr, xmlDoc);
         }
       } catch (error) {
-        console.error(`Ошибка для ${rssLink}:`, error);
+        throw new Error(`Ошибка для ${rssLink}: ${error.message}`);
       }
     }));
   } finally {
     isUpdating = false;
     setTimeout(checkUpdates, 5000);
   }
-};
+}

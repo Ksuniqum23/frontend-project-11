@@ -35,7 +35,6 @@ export const addNewRssInState = (xmlDoc, rssLink) => {
   Object.assign(state.data.posts, posts.postsPool);
   state.ui.rssLinksOrder.push(rssLink);
   state.ui.postsOrder[rssLink] = posts.postOrderArr;
-  console.log(state);
   updateUI(state);
 };
 

@@ -35,10 +35,10 @@ export const submitHandler = async (rssLink) => {
     // Возвращаем xmlDoc на случай, если кто-то хочет использовать результат
     return xmlDoc;
   } catch (error) {
-    console.error('submitHandler error:', error);
     feedbackMessage.type = 'danger';
     feedbackMessage.message = error.message || 'errors.unknown';
     updateFeedback(feedbackMessage.type, feedbackMessage.message);
+    throw error;
   }
 };
 
