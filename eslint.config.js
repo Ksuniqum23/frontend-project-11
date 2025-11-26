@@ -1,61 +1,22 @@
+import js from '@eslint/js'
 import globals from 'globals'
+import reactHooks from 'eslint-plugin-react-hooks'
+import reactRefresh from 'eslint-plugin-react-refresh'
+import tseslint from 'typescript-eslint'
+import { globalIgnores } from 'eslint/config'
 
-import path from 'path'
-import { fileURLToPath } from 'url'
-import { FlatCompat } from '@eslint/eslintrc'
-import pluginJs from '@eslint/js'
-import importPlugin from 'eslint-plugin-import'
-
-// mimic CommonJS variables -- not needed if using CommonJS
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-  recommendedConfig: pluginJs.configs.recommended,
-})
-
-export default [
+export default tseslint.config([
+  globalIgnores(['dist']),
   {
-    ignores: ['dist/'],
-  },
-  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      js.configs.recommended,
+      tseslint.configs.recommended,
+      reactHooks.configs['recommended-latest'],
+      reactRefresh.configs.vite,
+    ],
     languageOptions: {
-      globals: {
-        ...globals.node,
-        ...globals.jest,
-        ...globals.browser,
-      },
-      parserOptions: {
-        // Eslint doesn't supply ecmaVersion in `parser.js` `context.parserOptions`
-        // This is required to avoid ecmaVersion < 2015 error or 'import' / 'export' error
-        ecmaVersion: 'latest',
-        sourceType: 'module',
-      },
-    },
-    plugins: { import: importPlugin },
-    rules: {
-      ...importPlugin.configs.recommended.rules,
+      ecmaVersion: 2020,
+      globals: globals.browser,
     },
   },
-  ...compat.extends('airbnb-base'),
-  {
-    rules: {
-      'no-underscore-dangle': [
-        'error',
-        {
-          allow: ['__filename', '__dirname'],
-        },
-      ],
-      'import/extensions': [
-        'error',
-        {
-          js: 'always',
-        },
-      ],
-      'import/no-named-as-default': 'off',
-      'import/no-named-as-default-member': 'off',
-      'no-console': 'off',
-      'import/no-extraneous-dependencies': 'off',
-    },
-  },
-]
