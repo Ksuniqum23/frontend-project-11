@@ -24,7 +24,7 @@ export const updateUI = (state) => {
             postLink.href = postData.link;
             postLink.textContent = postData.title;
             postLink.target = '_blank';
-            postLink.classList.add('text-decoration-none');
+            postLink.classList.add('fw-bold');
 
             const postButton = document.createElement('button');
             postButton.classList.add('btn', 'btn-outline-primary', 'btn-sm');
@@ -32,7 +32,7 @@ export const updateUI = (state) => {
             postButton.textContent = 'Просмотр';
 
             if (state.ui.readPosts.includes(postData.link)) {
-                postLink.classList.add('text-muted');
+                postLink.classList.add('fw-normal');
                 postButton.classList.add('disabled');
             }
 

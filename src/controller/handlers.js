@@ -20,23 +20,19 @@ export const submitHandler = async (rssLink) => {
     };
 
     try {
-        // 1. Валидация URL
+    // 1. Валидация URL
         await validateURL.validate(
             { url: rssLink },
             { context: { feeds: state.ui.rssLinksOrder } }
         );
-
-        // 2. Получаем RSS через fetch
+    // 2. Получаем RSS через fetch
         const xmlString = await fetchRSS(rssLink);
-
-        // 3. Парсим XML и проверяем RSS
+    // 3. Парсим XML и проверяем RSS
         const xmlDoc = parseXML(xmlString);
         validateRss(xmlDoc); // должен бросить ошибку, если это не RSS
-
-        // 4. Добавляем в состояние и показываем сообщение
+    // 4. Добавляем в состояние и показываем сообщение
         addRSS(xmlDoc, feedbackMessage, rssLink);
-
-        // Возвращаем xmlDoc на случай, если кто-то хочет использовать результат
+    // Возвращаем xmlDoc на случай, если кто-то хочет использовать результат
         return xmlDoc;
     } catch (error) {
         console.error('submitHandler error:', error);
