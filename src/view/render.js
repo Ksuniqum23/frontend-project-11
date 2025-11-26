@@ -48,7 +48,7 @@ export const updateFeedback = (type, message) => {
   feedback.textContent = i18n.t(message)
   feedback.classList.remove('text-success', 'text-danger')
   feedback.classList.add(`text-${type}`)
-};
+}
 
 export const modalRender = (currentPostData) => {
   const modalElement = document.getElementById('modalPreviewPost')

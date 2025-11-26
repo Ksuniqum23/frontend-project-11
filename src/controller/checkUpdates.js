@@ -13,6 +13,7 @@ export default async function checkUpdates() {
         const xmlString = await fetchRSS(rssLink)
         const xmlDoc = await parseXML(xmlString)
         const newPostLinksArr = []
+
         xmlDoc.querySelectorAll('item').forEach((item) => {
           const postLink = item.querySelector('link')?.textContent
           if (!(state.data.posts[postLink]?.link === postLink)) {
