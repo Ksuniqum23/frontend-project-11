@@ -1,59 +1,61 @@
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { FlatCompat } from '@eslint/eslintrc';
-import pluginJs from '@eslint/js';
-import importPlugin from 'eslint-plugin-import';
-import globals from 'globals';
+import globals from 'globals'
 
-// Настройка пути для FlatCompat
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import path from 'path'
+import { fileURLToPath } from 'url'
+import { FlatCompat } from '@eslint/eslintrc'
+import pluginJs from '@eslint/js'
+import importPlugin from 'eslint-plugin-import'
 
+// mimic CommonJS variables -- not needed if using CommonJS
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 const compat = new FlatCompat({
   baseDirectory: __dirname,
   recommendedConfig: pluginJs.configs.recommended,
-});
+})
 
 export default [
-  // Игнорируем папку сборки
   {
-    ignores: ['dist/', 'webpack.config.js'],
+    ignores: ['dist/'],
   },
-
-  // Общие правила для всех JS файлов
   {
     languageOptions: {
       globals: {
         ...globals.node,
-        ...globals.browser,
         ...globals.jest,
+        ...globals.browser,
       },
       parserOptions: {
+        // Eslint doesn't supply ecmaVersion in `parser.js` `context.parserOptions`
+        // This is required to avoid ecmaVersion < 2015 error or 'import' / 'export' error
         ecmaVersion: 'latest',
         sourceType: 'module',
       },
     },
-    plugins: {
-      import: importPlugin,
-    },
+    plugins: { import: importPlugin },
     rules: {
       ...importPlugin.configs.recommended.rules,
-      'no-console': 'off',       // можно выводить в консоль
-      semi: 'off',               // отключаем проверку точек с запятой
     },
   },
-
-  // Подключаем Airbnb-base через FlatCompat
   ...compat.extends('airbnb-base'),
-
-  // Дополнительные правила проекта
   {
     rules: {
-      'no-underscore-dangle': ['error', { allow: ['__filename', '__dirname'] }],
-      'import/extensions': ['error', 'ignorePackages', { js: 'always' }],
+      'no-underscore-dangle': [
+        'error',
+        {
+          allow: ['__filename', '__dirname'],
+        },
+      ],
+      'import/extensions': [
+        'error',
+        {
+          js: 'always',
+        },
+      ],
       'import/no-named-as-default': 'off',
       'import/no-named-as-default-member': 'off',
+      'no-console': 'off',
       'import/no-extraneous-dependencies': 'off',
     },
   },
-];
+]
