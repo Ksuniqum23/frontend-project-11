@@ -2,36 +2,19 @@ name: SonarCloud Scan
 
 on:
   push:
-    branches: [ main, develop ]
+    branches:
+      - main
   pull_request:
-
+    types: [opened, synchronize, reopened]
 jobs:
-  sonar:
+  sonarqube:
+    name: SonarQube
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Run linter (optional)
-        run: npm run lint || true
-
-      - name: SonarCloud Scan
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v6
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}    # твой секрет
-        with:
-          args: >
-            -Dsonar.host.url=https://sonarcloud.io
-            -Dsonar.projectKey=frontend-project-11
-            -Dsonar.sources=src
-            -Dsonar.exclusions=**/node_modules/**,dist/**,build/**
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
