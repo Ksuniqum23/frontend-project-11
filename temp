@@ -42,3 +42,6 @@ git rm -r --cached node_modules
     npm run dev
     ЗАПУСТИЛСЯ!!
 
+6. Bootstrap
+    npm install bootstrap @popperjs/core
+
