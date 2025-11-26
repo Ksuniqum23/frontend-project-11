@@ -16,7 +16,7 @@ const compat = new FlatCompat({
 export default [
   // Игнорируем папку сборки
   {
-    ignores: ['dist/'],
+    ignores: ['dist/', 'webpack.config.js'],
   },
 
   // Общие правила для всех JS файлов
