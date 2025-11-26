@@ -8,6 +8,6 @@ const fetchRSS = url => axios.get(`https://allorigins.hexlet.app/get?url=${encod
     if (error.message === 'Network Error') {
       throw new Error(i18n.t('errors.network'))
     }
-  })
+  });
 
 export default fetchRSS
