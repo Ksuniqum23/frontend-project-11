@@ -1,17 +1,17 @@
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { FlatCompat } from '@eslint/eslintrc';
-import pluginJs from '@eslint/js';
-import importPlugin from 'eslint-plugin-import';
-import globals from 'globals';
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { FlatCompat } from '@eslint/eslintrc'
+import pluginJs from '@eslint/js'
+import importPlugin from 'eslint-plugin-import'
+import globals from 'globals'
 
 // Настройка пути для FlatCompat
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 const compat = new FlatCompat({
   baseDirectory: __dirname,
   recommendedConfig: pluginJs.configs.recommended,
-});
+})
 
 export default [
   // Игнорируем папку сборки
@@ -55,4 +55,4 @@ export default [
       'import/no-extraneous-dependencies': 'off',
     },
   },
-];
+]

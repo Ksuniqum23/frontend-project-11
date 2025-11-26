@@ -1,34 +1,34 @@
-import state from '../state/state.js';
-import fetchRSS from './fetchRss.js';
-import parseXML from './parseXml.js';
-import { addNewPostsInState } from '../state/updateState.js';
+import state from '../state/state.js'
+import fetchRSS from './fetchRss.js'
+import parseXML from './parseXml.js'
+import { addNewPostsInState } from '../state/updateState.js'
 
-let isUpdating = false;
+let isUpdating = false
 export default async function checkUpdates() {
-  if (isUpdating) return;
-  isUpdating = true;
+  if (isUpdating) return
+  isUpdating = true
   try {
     await Promise.all(state.ui.rssLinksOrder.map(async (rssLink) => {
       try {
-        const xmlString = await fetchRSS(rssLink);
-        const xmlDoc = await parseXML(xmlString);
-        const newPostLinksArr = [];
+        const xmlString = await fetchRSS(rssLink)
+        const xmlDoc = await parseXML(xmlString)
+        const newPostLinksArr = []
         xmlDoc.querySelectorAll('item').forEach((item) => {
-          const postLink = item.querySelector('link')?.textContent;
+          const postLink = item.querySelector('link')?.textContent
           if (!(state.data.posts[postLink]?.link === postLink)) {
-            newPostLinksArr.push(postLink);
+            newPostLinksArr.push(postLink)
           }
-        });
+        })
 
         if (newPostLinksArr.length > 0) {
-          addNewPostsInState(rssLink, newPostLinksArr, xmlDoc);
+          addNewPostsInState(rssLink, newPostLinksArr, xmlDoc)
         }
       } catch (error) {
-        throw new Error(`Ошибка для ${rssLink}: ${error.message}`);
+        throw new Error(`Ошибка для ${rssLink}: ${error.message}`)
       }
-    }));
+    }))
   } finally {
-    isUpdating = false;
-    setTimeout(checkUpdates, 5000);
+    isUpdating = false
+    setTimeout(checkUpdates, 5000)
   }
 }
