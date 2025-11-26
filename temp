@@ -22,3 +22,11 @@ sudo apt install make -y
 
 git rm -r --cached node_modules
     //убираем из индекса нод модули
+
+4. Добавила eslint.config
+    npm install --save-dev \
+    npm install --save-dev eslint @eslint/eslintrc @eslint/js eslint-plugin-import globals eslint-config-airbnb-base
+    npm install --save-dev eslint @eslint/eslintrc @eslint/js eslint-plugin-import globals eslint-config-airbnb-base --legacy-peer-deps
+
+     npx eslint .
+     npx eslint . --fix
