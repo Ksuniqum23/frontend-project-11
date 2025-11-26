@@ -30,3 +30,15 @@ git rm -r --cached node_modules
 
      npx eslint .
      npx eslint . --fix
+
+5. VITE
+    npm create vite@latest
+    npm install --save-dev vite
+
+    curl -fsSL https://deb.nodesource.com/setup_24.x | sudo -E bash -
+    sudo apt-get install -y nodejs
+    node -v - 24!!!
+
+    npm run dev
+    ЗАПУСТИЛСЯ!!
+
