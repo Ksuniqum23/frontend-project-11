@@ -15,6 +15,7 @@ npm install eslint webpack webpack-cli webpack-dev-server --save-dev
        webpack-dev-server → локальный сервер для разработки.
        --save-dev → сохраняем зависимости только для разработки, не для продакшена.
 
+
 3. add Makefile
 
 sudo apt install make -y
@@ -50,3 +51,4 @@ npm install axios
 npm install i18next
 npm install @stylistic/eslint-plugin
 
+npm run test:coverage
