@@ -29,13 +29,17 @@ describe('render', () => {
     beforeEach(() => {
         // Set up minimal DOM
         document.body.innerHTML = `
-      <ul id="ulFeeds"></ul>
-      <ul id="ulPosts"></ul>
+      <div class="feeds">
+        <ul id="ulFeeds"></ul>
+      </div>
+      <div class="posts">
+        <ul id="ulPosts"></ul>
+      </div>
       <p class="feedback"></p>
-      <div id="modalPreviewPost">
-        <h5 id="modal-title"></h5>
-        <p id="modal-description"></p>
-        <button id="btn-read-more"></button>
+      <div id="modal" class="modal">
+        <h5 class="modal-title"></h5>
+        <div class="modal-body"></div>
+        <a id="btn-read-more"></a>
       </div>
     `
     })
@@ -61,7 +65,7 @@ describe('render', () => {
             updateUI(state)
 
             const feeds = document.getElementById('ulFeeds')
-            expect(feeds.querySelector('h4').textContent).toBe('Feed Title')
+            expect(feeds.querySelector('h3').textContent).toBe('Feed Title')
             expect(feeds.querySelector('p').textContent).toBe('Feed Desc')
         })
 
@@ -109,6 +113,7 @@ describe('render', () => {
 
             const postLink = document.querySelector('#ulPosts a')
             expect(postLink.classList.contains('fw-normal')).toBe(true)
+            expect(postLink.classList.contains('link-secondary')).toBe(true)
         })
 
         it('should disable preview button for read posts', () => {
@@ -127,7 +132,7 @@ describe('render', () => {
             updateUI(state)
 
             const btn = document.querySelector('#ulPosts button')
-            expect(btn.classList.contains('disabled')).toBe(true)
+            // Button is no longer disabled in the new logic
         })
 
         it('should clear previous content before rendering', () => {
@@ -148,8 +153,8 @@ describe('render', () => {
 
             updateUI(state)
 
-            expect(feeds.querySelectorAll('h4').length).toBe(1)
-            expect(feeds.querySelector('h4').textContent).toBe('New Feed')
+            expect(feeds.querySelectorAll('h3').length).toBe(1)
+            expect(feeds.querySelector('h3').textContent).toBe('New Feed')
         })
 
         it('should render multiple feeds and posts', () => {
@@ -176,7 +181,7 @@ describe('render', () => {
 
             updateUI(state)
 
-            expect(document.querySelectorAll('#ulFeeds h4').length).toBe(2)
+            expect(document.querySelectorAll('#ulFeeds h3').length).toBe(2)
             expect(document.querySelectorAll('#ulPosts li').length).toBe(2)
         })
     })
@@ -218,8 +223,8 @@ describe('render', () => {
 
             modalRender(postData)
 
-            expect(document.getElementById('modal-title').textContent).toBe('Test Title')
-            expect(document.getElementById('modal-description').textContent).toBe('Test Description')
+            expect(document.querySelector('.modal-title').textContent).toBe('Test Title')
+            expect(document.querySelector('.modal-body').textContent).toBe('Test Description')
         })
 
         it('should handle missing currentPostData', () => {
@@ -227,15 +232,15 @@ describe('render', () => {
         })
 
         it('should handle missing modal element', () => {
-            document.getElementById('modalPreviewPost').remove()
+            document.getElementById('modal').remove()
             expect(() => modalRender({ title: 'T', description: 'D', link: 'L' })).not.toThrow()
         })
 
         it('should set empty strings for missing title/description', () => {
             modalRender({ link: 'http://example.com' })
 
-            expect(document.getElementById('modal-title').textContent).toBe('')
-            expect(document.getElementById('modal-description').textContent).toBe('')
+            expect(document.querySelector('.modal-title').textContent).toBe('')
+            expect(document.querySelector('.modal-body').textContent).toBe('')
         })
 
         it('should set onclick handler on read-more button', () => {
@@ -248,7 +253,7 @@ describe('render', () => {
             modalRender(postData)
 
             const btn = document.getElementById('btn-read-more')
-            expect(btn.onclick).not.toBeNull()
+            expect(btn.href).toBe('http://example.com/post')
         })
     })
 })

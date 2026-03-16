@@ -48,13 +48,13 @@
 
   <section class="container">
     <div class="row gx-4 mx-n2">
-      <div class="bg-white border rounded shadow-sm p-4 col mx-2">
+      <div class="bg-white border rounded shadow-sm p-4 col mx-2 feeds">
         <h2 class="h5">Фиды:</h2>
         <ul class="list-group list-group-flush" id="ulFeeds">
           <!-- сюда будут добавляться элементы -->
         </ul>
       </div>
-      <div class="bg-white border rounded shadow-sm p-4 col mx-2">
+      <div class="bg-white border rounded shadow-sm p-4 col mx-2 posts">
         <h2 class="h5">Посты:</h2>
         <ul class="list-group list-group-flush mt-3" id="ulPosts">
           <!-- сюда будут добавляться элементы -->
@@ -63,7 +63,7 @@
     </div>
   </section>
 
-  <div class="modal" tabindex="-1" id="modalPreviewPost">
+  <div class="modal" tabindex="-1" id="modal">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -74,7 +74,7 @@
           <p id="modal-description"></p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" id="btn-read-more">Читать полностью</button>
+          <a class="btn btn-primary" id="btn-read-more" target="_blank" role="button">Читать полностью</a>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
         </div>
       </div>

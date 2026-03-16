@@ -1,17 +1,66 @@
-import js from '@eslint/js'
 import globals from 'globals'
-import { defineConfig } from 'eslint/config'
-import { includeIgnoreFile } from '@eslint/compat'
-import stylistic from '@stylistic/eslint-plugin'
+import path from 'path'
 import { fileURLToPath } from 'url'
+import { FlatCompat } from '@eslint/eslintrc'
+import pluginJs from '@eslint/js'
+import importPlugin from 'eslint-plugin-import'
 
-const gitIgnorePath = fileURLToPath(new URL('.gitignore', import.meta.url))
-const eslintIgnorePath = fileURLToPath(new URL('.eslintignore', import.meta.url))
+// mimic CommonJS variables -- not needed if using CommonJS
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+const compat = new FlatCompat({
+  baseDirectory: __dirname,
+  recommendedConfig: pluginJs.configs.recommended,
+})
 
-export default defineConfig([
-  includeIgnoreFile(gitIgnorePath),
-  includeIgnoreFile(eslintIgnorePath),
-  stylistic.configs.recommended,
-  { files: ['**/*.{js,mjs,cjs}'], plugins: { js }, extends: ['js/recommended'] },
-  { files: ['**/*.{js,mjs,cjs}'], languageOptions: { globals: { ...globals.browser, process: 'readonly' } } },
-])
+export default [
+  {
+    ignores: ['dist/'],
+  },
+  {
+    languageOptions: {
+      globals: {
+        ...globals.node,
+        ...globals.jest,
+        ...globals.browser,
+      },
+      parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+      },
+    },
+    plugins: { import: importPlugin },
+    rules: {
+      ...importPlugin.configs.recommended.rules,
+    },
+  },
+  ...compat.extends('airbnb-base'),
+  {
+    rules: {
+      ...importPlugin.configs.recommended.rules,
+      'no-underscore-dangle': [
+        'error',
+        {
+          allow: ['__filename', '__dirname'],
+        },
+      ],
+      'import/extensions': [
+        'error',
+        {
+          js: 'always',
+        },
+      ],
+      'import/no-named-as-default': 'off',
+      'import/no-named-as-default-member': 'off',
+      'no-console': 'off',
+      'import/no-extraneous-dependencies': 'off',
+      'quote-props': 'off',
+      'arrow-body-style': 'off',
+      'arrow-parens': 'off',
+      'brace-style': 'off',
+      '@stylistic/brace-style': 'off',
+      '@stylistic/indent': 'off',
+      '@stylistic/arrow-parens': 'off',
+    },
+  },
+]

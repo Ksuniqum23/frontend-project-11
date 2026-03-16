@@ -8,9 +8,11 @@ export const updateUI = (state) => {
   posts.innerHTML = ''
 
   state.ui.rssLinksOrder.forEach((rssLink) => {
-    const feedTitle = document.createElement('h4')
+    const feedTitle = document.createElement('h3')
     const feedDescription = document.createElement('p')
+    feedTitle.classList.add('h6', 'm-0')
     feedTitle.textContent = state.data.feeds[rssLink].title
+    feedDescription.classList.add('m-0', 'small', 'text-black-50')
     feedDescription.textContent = state.data.feeds[rssLink].description
     feeds.appendChild(feedTitle)
     feeds.appendChild(feedDescription)
@@ -32,8 +34,8 @@ export const updateUI = (state) => {
       postButton.textContent = 'Просмотр'
 
       if (state.ui.readPosts.includes(postData.link)) {
-        postLink.classList.add('fw-normal')
-        postButton.classList.add('disabled')
+        postLink.classList.remove('fw-bold')
+        postLink.classList.add('fw-normal', 'link-secondary')
       }
 
       postItem.appendChild(postLink)
@@ -51,22 +53,17 @@ export const updateFeedback = (type, message) => {
 }
 
 export const modalRender = (currentPostData) => {
-  const modalElement = document.getElementById('modalPreviewPost')
+  const modalElement = document.getElementById('modal')
   if (!modalElement || !currentPostData) return
-  const modalTitle = modalElement.querySelector('#modal-title')
-  const modalDescription = modalElement.querySelector('#modal-description')
+  const modalTitle = modalElement.querySelector('.modal-title')
+  const modalDescription = modalElement.querySelector('.modal-body')
   const readMoreBtn = modalElement.querySelector('#btn-read-more')
 
   if (modalTitle) modalTitle.textContent = currentPostData.title || ''
   if (modalDescription) modalDescription.textContent = currentPostData.description || ''
 
   if (readMoreBtn) {
-    readMoreBtn.onclick = null
-    readMoreBtn.onclick = () => {
-      if (currentPostData.link) {
-        window.open(currentPostData.link, '_blank') // Открываем в новой вкладке
-      }
-    }
+    readMoreBtn.href = currentPostData.link || '#'
   }
   const modal = new Modal(modalElement)
   modal.show()

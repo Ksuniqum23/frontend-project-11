@@ -27,7 +27,7 @@ describe('i18n', () => {
     })
 
     it('should translate errors.network', () => {
-        expect(i18n.t('errors.network')).toBe('Ошибка сети. Попробуйте позже.')
+        expect(i18n.t('errors.network')).toBe('Ошибка сети')
     })
 
     it('should translate ui.name', () => {

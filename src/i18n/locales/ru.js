@@ -17,7 +17,11 @@ export default {
       invalidXml: 'Ресурс не содержит валидный RSS',
       // invalidXml: 'RSS уже существует',
       // invalidXml: 'Не могу разобрать XML',
-      network: 'Ошибка сети. Попробуйте позже.',
+      network: 'Ошибка сети',
+    },
+    buttons: {
+      preview: 'Просмотр',
+      readFull: 'Читать полностью',
     },
   },
 }
