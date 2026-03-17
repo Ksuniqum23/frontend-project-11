@@ -52,3 +52,4 @@ npm install i18next
 npm install @stylistic/eslint-plugin
 
 npm run test:coverage
+commit
