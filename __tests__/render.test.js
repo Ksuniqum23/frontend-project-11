@@ -133,7 +133,7 @@ describe('render', () => {
 
       updateUI(state)
 
-      const btn = document.querySelector('#ulPosts button')
+      // const btn = document.querySelector('#ulPosts button')
       // Button is no longer disabled in the new logic
     })
 

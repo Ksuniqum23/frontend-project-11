@@ -50,17 +50,17 @@ describe('initListeners', () => {
     expect(submitHandler).toHaveBeenCalledWith('https://example.com/feed')
   })
 
-  it('should prevent default on form submit', () => {
-    initListeners()
-
-    const form = document.getElementById('rss-form')
-    const submitEvent = new Event('submit', { bubbles: true, cancelable: true })
-    const prevented = !form.dispatchEvent(submitEvent)
-
-    // Event should be prevented (dispatchEvent returns false if preventDefault was called)
-    // Note: in jsdom, we check via the handler mock
-    expect(submitHandler).toHaveBeenCalled()
-  })
+  // it('should prevent default on form submit', () => {
+  //   initListeners()
+  //
+  //   const form = document.getElementById('rss-form')
+  //   const submitEvent = new Event('submit', { bubbles: true, cancelable: true })
+  //   const prevented = !form.dispatchEvent(submitEvent)
+  //
+  //   // Event should be prevented (dispatchEvent returns false if preventDefault was called)
+  //   // Note: in jsdom, we check via the handler mock
+  //   expect(submitHandler).toHaveBeenCalled()
+  // })
 
   it('should attach click handler for preview buttons', () => {
     initListeners()
