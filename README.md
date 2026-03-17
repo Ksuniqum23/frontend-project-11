@@ -23,7 +23,7 @@ Web app for subscribing to and reading RSS feeds in a unified interface.
 - HTML5 
 - CSS3
 - Vanilla JavaScript (ES6 modules)
-- Webpack 5
+- Vite
 - RSS 2.0
 
 ## 🚀 Quick Start
