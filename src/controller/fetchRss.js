@@ -1,4 +1,3 @@
-/* eslint-disable @stylistic/indent, @stylistic/arrow-parens */
 import axios from 'axios'
 import i18n from '../i18n/init.js'
 

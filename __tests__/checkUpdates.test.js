@@ -25,7 +25,7 @@ vi.mock('../src/view/render.js', () => ({
   modalRender: vi.fn(),
 }))
 vi.mock('../src/i18n/init.js', () => ({
-  default: { t: (key) => key, init: vi.fn() },
+  default: { t: key => key, init: vi.fn() },
 }))
 
 describe('checkUpdates', () => {
@@ -102,7 +102,7 @@ describe('checkUpdates', () => {
 
   it('should schedule next check with setTimeout', async () => {
     state.ui.rssLinksOrder = []
-    const setTimeoutSpy = vi.spyOn(global, 'setTimeout')
+    const setTimeoutSpy = vi.spyOn(globalThis, 'setTimeout')
 
     await checkUpdates()
 

@@ -13,7 +13,7 @@ vi.mock('axios', () => ({
 
 vi.mock('../src/i18n/init.js', () => ({
   default: {
-    t: (key) => key,
+    t: key => key,
     init: vi.fn(),
   },
 }))

@@ -24,6 +24,7 @@ export default [
         ...globals.node,
         ...globals.jest,
         ...globals.browser,
+        globalThis: 'readonly',
       },
       parserOptions: {
         ecmaVersion: 'latest',
@@ -31,7 +32,7 @@ export default [
       },
     },
     plugins: {
-      import: importPlugin,
+      'import': importPlugin,
       '@stylistic': stylistic,
     },
     rules: {
@@ -47,7 +48,7 @@ export default [
         { allow: ['__filename', '__dirname'] },
       ],
       'import/extensions': ['error', { js: 'always' }],
-      semi: 'off',
+      'semi': 'off',
       'import/no-unresolved': 'off',
       'import/namespace': 'off',
       'import/default': 'off',
@@ -58,6 +59,7 @@ export default [
       'quote-props': 'off',
       'arrow-body-style': 'off',
       'arrow-parens': 'off',
+      '@stylistic/arrow-parens': 'off',
       'brace-style': 'off',
       'indent': 'off',
 

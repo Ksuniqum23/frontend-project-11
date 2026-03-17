@@ -27,7 +27,7 @@ export default async function checkUpdates() {
           }
           // eslint-disable-next-line @stylistic/brace-style
         } catch (error) {
-          throw new Error(`Ошибка для ${rssLink}: ${error.message}`)
+          throw new Error(`Ошибка для ${rssLink}: ${error.message}`, { cause: error })
         }
       }),
     )
