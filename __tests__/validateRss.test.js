@@ -2,13 +2,13 @@ import { describe, it, expect } from 'vitest'
 import throwIfInvalidRSS from '../src/controller/validateRss.js'
 
 const createXmlDoc = (xmlString) => {
-    const parser = new DOMParser()
-    return parser.parseFromString(xmlString, 'application/xml')
+  const parser = new DOMParser()
+  return parser.parseFromString(xmlString, 'application/xml')
 }
 
 describe('throwIfInvalidRSS', () => {
-    it('should not throw for valid RSS with items', () => {
-        const xml = createXmlDoc(`
+  it('should not throw for valid RSS with items', () => {
+    const xml = createXmlDoc(`
       <rss>
         <channel>
           <title>Feed</title>
@@ -16,16 +16,16 @@ describe('throwIfInvalidRSS', () => {
         </channel>
       </rss>
     `)
-        expect(() => throwIfInvalidRSS(xml)).not.toThrow()
-    })
+    expect(() => throwIfInvalidRSS(xml)).not.toThrow()
+  })
 
-    it('should throw "errors.invalidXml" for XML with parsererror', () => {
-        const xml = createXmlDoc('<unclosed>')
-        expect(() => throwIfInvalidRSS(xml)).toThrow('errors.invalidXml')
-    })
+  it('should throw "errors.invalidXml" for XML with parsererror', () => {
+    const xml = createXmlDoc('<unclosed>')
+    expect(() => throwIfInvalidRSS(xml)).toThrow('errors.invalidXml')
+  })
 
-    it('should throw "errors.invalidRss" for valid XML without items', () => {
-        const xml = createXmlDoc(`
+  it('should throw "errors.invalidRss" for valid XML without items', () => {
+    const xml = createXmlDoc(`
       <rss>
         <channel>
           <title>Feed</title>
@@ -33,11 +33,11 @@ describe('throwIfInvalidRSS', () => {
         </channel>
       </rss>
     `)
-        expect(() => throwIfInvalidRSS(xml)).toThrow('errors.invalidRss')
-    })
+    expect(() => throwIfInvalidRSS(xml)).toThrow('errors.invalidRss')
+  })
 
-    it('should not throw for RSS with multiple items', () => {
-        const xml = createXmlDoc(`
+  it('should not throw for RSS with multiple items', () => {
+    const xml = createXmlDoc(`
       <rss>
         <channel>
           <item><title>Post 1</title></item>
@@ -46,6 +46,6 @@ describe('throwIfInvalidRSS', () => {
         </channel>
       </rss>
     `)
-        expect(() => throwIfInvalidRSS(xml)).not.toThrow()
-    })
+    expect(() => throwIfInvalidRSS(xml)).not.toThrow()
+  })
 })
