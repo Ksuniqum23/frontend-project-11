@@ -4,6 +4,7 @@ import { fileURLToPath } from 'url'
 import { FlatCompat } from '@eslint/eslintrc'
 import pluginJs from '@eslint/js'
 import importPlugin from 'eslint-plugin-import'
+import stylistic from '@stylistic/eslint-plugin'
 
 // mimic CommonJS variables -- not needed if using CommonJS
 const __filename = fileURLToPath(import.meta.url)
@@ -29,7 +30,10 @@ export default [
         sourceType: 'module',
       },
     },
-    plugins: { import: importPlugin },
+    plugins: {
+      import: importPlugin,
+      '@stylistic': stylistic,
+    },
     rules: {
       ...importPlugin.configs.recommended.rules,
     },
@@ -40,17 +44,11 @@ export default [
       ...importPlugin.configs.recommended.rules,
       'no-underscore-dangle': [
         'error',
-        {
-          allow: ['__filename', '__dirname'],
-        },
+        { allow: ['__filename', '__dirname'] },
       ],
-      'import/extensions': [
-        'error',
-        {
-          js: 'always',
-        },
-      ],
+      'import/extensions': ['error', { js: 'always' }],
       semi: 'off',
+      'import/no-unresolved': 'off',
       'import/namespace': 'off',
       'import/default': 'off',
       'import/no-named-as-default': 'off',
@@ -61,9 +59,8 @@ export default [
       'arrow-body-style': 'off',
       'arrow-parens': 'off',
       'brace-style': 'off',
-      '@stylistic/brace-style': 'off',
-      '@stylistic/indent': 'off',
-      '@stylistic/arrow-parens': 'off',
+      'indent': 'off',
+
     },
   },
 ]
